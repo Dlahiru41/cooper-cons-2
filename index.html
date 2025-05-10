@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooper Construction | Shoring & Piling Specialists</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #709AD5;
+            --secondary: #9DC3E6;
+            --dark: #19738D;
+            --darker: #1F2232;
+            --accent: #25283D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--darker);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            color: var(--dark);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: var(--darker);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(25, 115, 141, 0.8), rgba(31, 34, 50, 0.9)), url('/api/placeholder/1200/600.png') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            margin-top: 100px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn.btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            margin-left: 15px;
+        }
+
+        .btn.btn-outline:hover {
+            background-color: var(--primary);
+        }
+
+        /* Statistics Section */
+        .statistics {
+            background-color: white;
+            padding: 60px 0;
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            position: relative;
+            padding: 20px;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 60px;
+            width: 1px;
+            background-color: #e0e0e0;
+        }
+
+        .stat-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--darker);
+            margin-bottom: 5px;
+        }
+
+        .stat-text {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Responsive adjustments for statistics */
+        @media (max-width: 768px) {
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: #f9f9f9;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .service-card:hover .service-card-img img {
+            transform: scale(1.1);
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card h3 {
+            color: var(--dark);
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .service-card ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .service-card ul li {
+            padding: 5px 0;
+            color: #666;
+        }
+
+        .service-card ul li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--dark);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 300px;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(25, 115, 141, 0.9) 0%, rgba(25, 115, 141, 0.5) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay h3 {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .project-overlay p {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* Values Section */
+        .values {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .values .section-title {
+            color: white;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-icon {
+            font-size: 40px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Clients Section */
+        .clients-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .client-logo {
+            max-width: 180px;
+            height: auto;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: filter 0.3s, opacity 0.3s;
+        }
+
+        .client-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-item h4 {
+            font-size: 18px;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            color: #666;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--darker);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--darker);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0;
+                padding: 15px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <img src="/api/placeholder/120/80.png" alt="Cooper Construction Logo">
+            <div class="logo-text">
+                <h1>COOPER CONSTRUCTION</h1>
+                <span>SHORING & PILING</span>
+            </div>
+        </div>
+
+        <nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#values">Values</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="container hero-content">
+        <h1>Innovative Shoring & Piling Solutions</h1>
+        <p>Since 1996, Cooper Construction has been providing high-quality, reliable, and cost-effective foundations for construction and civil engineering projects across Sri Lanka.</p>
+        <div class="hero-buttons">
+            <a href="#services" class="btn">Our Services</a>
+            <a href="#contact" class="btn btn-outline">Contact Us</a>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="statistics">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-number" data-target="100">0</div>
+                <div class="stat-text">Successful Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-text">Team Members</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <div class="stat-number" data-target="85">0</div>
+                <div class="stat-text">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="stat-number" data-target="40">0</div>
+                <div class="stat-text">Modern Equipments</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Company Overview</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Established in 1996, Cooper Construction Shoring and Piling is a leading service provider of specialized Micro piling, sheet piling, shoring underpinning services with a rich legacy of delivering high-quality, reliable, and cost-effective solutions for construction and civil engineering projects.</p>
+                <p>With a team of skilled professionals, state-of-the-art equipment, and a commitment to safety and sustainability, we excel in providing support for a variety of construction projects, ranging from residential and commercial buildings to tunnels and large-scale infrastructure developments.</p>
+                <p>Our extensive experience and technical expertise enable us to tackle complex engineering challenges, ensuring the stability and safety of every project we undertake.</p>
+            </div>
+            <div class="about-image">
+                <img src="/api/placeholder/600/400.png" alt="Cooper Construction Team at Work">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="section services">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">What We Offer</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-card-img">
+                    <img src="/api/placeholder/400/300" alt="Piling Service">
+                </div>
+                <div class="service-card-content">
+                    <h3>Piling Service</h3>
+                    <ul>
+                        <li>Bored Piles</li>
+                        <li>Micro piles</li>
+                        <li>Mini Piles</li>
+                    </ul>
+                    <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-img">
+                    <img src="/api/placeholder/400/300" alt="Shoring Service">
+                </div>
+                <div class="service-card-content">
+                    <h3>Shoring Service</h3>
+                    <ul>
+                        <li>Timber Shoring</li>
+                        <li>Steel Plated Shoring</li>
+                        <li>Excavation Shoring</li>
+                    </ul>
+                    <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-img">
+                    <img src="/api/placeholder/400/300" alt="Sheet Piling Service">
+                </div>
+                <div class="service-card-content">
+                    <h3>Sheet Piling Service</h3>
+                    <ul>
+                        <li>Sheet Pile Driving TYPE 3</li>
+                        <li>Sheet Pile Driving TYPE 4</li>
+                    </ul>
+                    <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-img">
+                    <img src="/api/placeholder/400/300" alt="Additional Services">
+                </div>
+                <div class="service-card-content">
+                    <h3>Additional Services</h3>
+                    <ul>
+                        <li>Underpinning & Foundation Repair</li>
+                        <li>Deep Well & Tube Well Service</li>
+                    </ul>
+                    <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Recently Completed Projects</h2>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Mattakkuliya Project">
+                <div class="project-overlay">
+                    <h3>L & T Construction Project</h3>
+                    <p>Pre-Boring work, 200mm diameter, 9m depth</p>
+                    <p>Location: Mattakkuliya, Sri Lanka</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Andoga Project">
+                <div class="project-overlay">
+                    <h3>Priyantha Auto A/C Project</h3>
+                    <p>Pre-Boring and casting concrete with reinforcement, 300mm diameter, 10m depth</p>
+                    <p>Location: Andoga, Kenaliya, Sri Lanka</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Kegalle Prison Project">
+                <div class="project-overlay">
+                    <h3>Nesa Construction Project</h3>
+                    <p>972 ft² Timber Shoring Work for Prison</p>
+                    <p>Location: Kegalle, Sri Lanka</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Dialog Signal Towers">
+                <div class="project-overlay">
+                    <h3>SAW Engineering Project</h3>
+                    <p>Pre-Boring and casting concrete for Dialog signal towers</p>
+                    <p>Multiple locations across Sri Lanka</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="LECO Electricity Board">
+                <div class="project-overlay">
+                    <h3>Luminex PLC Project</h3>
+                    <p>753 ft² Steel Plated Shoring for LECO electricity board</p>
+                    <p>Location: Ekala, Sri Lanka</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="View More Projects">
+                <div class="project-overlay">
+                    <h3>View All Projects</h3>
+                    <p>Discover our complete portfolio of successful projects</p>
+                    <a href="#" class="btn">View All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section id="values" class="section values">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Our Core Values</h2>
+        </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                <h3>Safety First</h3>
+                <p>We prioritize the safety of our employees, clients, and the surrounding environment in every project.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3>Quality Excellence</h3>
+                <p>We are committed to providing the highest standard of services, ensuring reliability and durability in every aspect of our work.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Innovation</h3>
+                <p>Continuously seeking out new methods and technologies that enhance project efficiency and reduce cost.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Sustainability</h3>
+                <p>We actively seek eco-friendly and sustainable solutions in all our operations.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Customer Satisfaction</h3>
+                <p>We aim to build lasting relationships by delivering projects on time, within budget, and to the highest quality standards.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Why Choose Us?</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="/api/placeholder/600/400-1.png" alt="Cooper Construction Equipment">
+            </div>
+            <div class="about-text">
+                <p><strong>Experience & Expertise:</strong> Over 20 years of combined experience in the piling, sheet piling and shoring industry, ensuring our clients receive the highest quality service.</p>
+                <p><strong>Comprehensive Solutions:</strong> We provide end-to-end services, from inception to final project delivery.</p>
+                <p><strong>Custom Solution:</strong> Micropiling and shoring solutions to fit the specific needs of each project.</p>
+                <p><strong>Safety & Compliance:</strong> We adhere to the strictest safety standards and comply with all local and international building regulations.</p>
+                <a href="#contact" class="btn" style="margin-top: 20px;">Get in Touch</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Clients Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Our Clients</h2>
+            <p>We place paramount importance on comprehensive understanding our client's needs. Our unwavering commitment lies in delivering unparalleled quality services ensuring our client's enduring satisfaction and loyalty.</p>
+        </div>
+        <div class="clients-logo-grid">
+            <img src="/api/placeholder/180/100" alt="Prime Lands" class="client-logo">
+            <img src="/api/placeholder/180/100" alt="Sumana Constructions" class="client-logo">
+            <img src="/api/placeholder/180/100" alt="L&T" class="client-logo">
+            <img src="/api/placeholder/180/100" alt="LECO" class="client-logo">
+            <img src="/api/placeholder/180/100" alt="SAW Engineering" class="client-logo">
+            <img src="/api/placeholder/180/100" alt="Sanken Construction" class="client-logo">
+            <img src="/api/placeholder/180/100" alt="RS Projects" class="client-logo">
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section contact">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Get In Touch</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Address</h4>
+                            <p>No/04, Ja-Ela Watta, Waligampitiya, Ja-Ela, Sri Lanka</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>071-9901272 / 077-6342695</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>coopershoringandpiling@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Your Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="/api/placeholder/120/80.png" alt="Cooper Construction Logo">
+                </div>
+                <p>Cooper Construction Shoring & Piling - Your trusted partner in foundation solutions since 1996. We provide innovative, efficient, and sustainable piling and shoring services for construction projects across Sri Lanka.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Micro Piling</a></li>
+                    <li><a href="#">Sheet Piling</a></li>
+                    <li><a href="#">Shoring Services</a></li>
+                    <li><a href="#">Underpinning</a></li>
+                    <li><a href="#">Foundation Repair</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li>No/04, Ja-Ela Watta,</li>
+                    <li>Waligampitiya, Ja-Ela</li>
+                    <li>Sri Lanka</li>
+                    <li>Phone: 071-9901272</li>
+                    <li>Email: coopershoringandpiling@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Cooper Construction Shoring & Piling. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+
+</script>
+</body>
+<script src="script/script.js"></script>
+</html>
