@@ -109,9 +109,14 @@ window.addEventListener('scroll', function() {
 
 // Form submission
 document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Thank you for your message. We will get back to you soon!');
-    this.reset();
+    const submitBtn = this.querySelector('.btn');
+
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    // Let Formspree handle the rest
+    // The form will submit normally to Formspree
 });
 
 function animateCounters() {
@@ -405,21 +410,43 @@ function initFormAnimations() {
     // Form submission animation
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+        // Update form to use Formspree
+        contactForm.action = 'https://formspree.io/f/mvgrzakb';
+        contactForm.method = 'POST';
+
+        // Add hidden field for better email subject
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = '_subject';
+        hiddenInput.value = 'New Contact Form Submission - Cooper Construction';
+        contactForm.appendChild(hiddenInput);
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             // Add submitting class
             contactForm.classList.add('submitting');
 
-            // Simulate form submission
-            setTimeout(() => {
-                contactForm.classList.remove('submitting');
-                contactForm.classList.add('submitted');
+            // Create FormData to send to Formspree
+            const formData = new FormData(contactForm);
 
-                // Display success message
-                const successMessage = document.createElement('div');
-                successMessage.className = 'success-message';
-                successMessage.innerHTML = `
+            // Submit to Formspree using fetch
+            fetch('https://formspree.io/f/mvgrzakb', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                contactForm.classList.remove('submitting');
+
+                if (response.ok) {
+                    contactForm.classList.add('submitted');
+
+                    // Display success message
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.innerHTML = `
                     <div class="success-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
@@ -427,21 +454,48 @@ function initFormAnimations() {
                     <p>Thank you for contacting us. We will get back to you soon.</p>
                 `;
 
-                // Replace form with success message
-                contactForm.parentNode.appendChild(successMessage);
-                contactForm.style.display = 'none';
+                    // Replace form with success message
+                    contactForm.parentNode.appendChild(successMessage);
+                    contactForm.style.display = 'none';
 
-                // Reset form
+                    // Reset form
+                    setTimeout(() => {
+                        contactForm.reset();
+                        const formInputs = document.querySelectorAll('.form-control');
+                        formInputs.forEach(input => {
+                            if (input.parentElement) {
+                                input.parentElement.classList.remove('filled');
+                            }
+                        });
+                    }, 500);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            }).catch(error => {
+                contactForm.classList.remove('submitting');
+
+                // Display error message
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'error-message';
+                errorMessage.innerHTML = `
+                <div class="error-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Oops! Something went wrong</h3>
+                <p>Please try again or contact us directly at coopershoringandpiling@gmail.com</p>
+            `;
+
+                contactForm.parentNode.insertBefore(errorMessage, contactForm);
+
+                // Remove error message after 5 seconds
                 setTimeout(() => {
-                    contactForm.reset();
-                    formInputs.forEach(input => {
-                        input.parentElement.classList.remove('filled');
-                    });
-                }, 500);
-            }, 2000);
+                    if (errorMessage.parentNode) {
+                        errorMessage.parentNode.removeChild(errorMessage);
+                    }
+                }, 5000);
+            });
         });
     }
-}
 
 // Logo animation on hover
 function initLogoAnimation() {
@@ -730,4 +784,4 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         document.querySelector('.hero-content')?.classList.add('animated', 'fade-in-up');
     }, 300);
-});
+})}
