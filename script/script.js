@@ -411,7 +411,7 @@ function initFormAnimations() {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         // Update form to use Formspree
-        contactForm.action = 'https://formspree.io/f/mvgrzakb';
+        contactForm.action = 'https://formspree.io/f/mrbkqylr';
         contactForm.method = 'POST';
 
         // Add hidden field for better email subject
