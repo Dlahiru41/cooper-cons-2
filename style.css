@@ -611,7 +611,38 @@ nav ul li a:hover::after {
 }
 
 .contact-item p {
+    margin: 0;
     color: #666;
+}
+
+.contact-social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 8px;
+}
+
+.contact-social-links a {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, var(--primary), #0056b3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
+}
+
+.contact-social-links a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3, var(--primary));
+}
+
+.contact-social-links a i {
+    font-size: 16px;
 }
 
 .contact-form {
