@@ -236,6 +236,10 @@ nav ul li a:hover::after {
     background-color: var(--primary);
 }
 
+.btn.btn-margin-top {
+    margin-top: 20px;
+}
+
 /* Statistics Section */
 .statistics {
     background-color: white;
