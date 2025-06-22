@@ -46,6 +46,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
+    position: relative;
 }
 
 .logo {
@@ -76,9 +77,15 @@ header {
     font-weight: 600;
 }
 
+nav {
+    position: relative;
+}
+
 nav ul {
     display: flex;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li {
@@ -90,6 +97,9 @@ nav ul li a {
     font-weight: 500;
     transition: color 0.3s;
     position: relative;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
 }
 
 nav ul li a:hover {
@@ -118,6 +128,59 @@ nav ul li a:hover::after {
     cursor: pointer;
     font-size: 24px;
     color: var(--dark);
+    padding: 10px;
+    z-index: 1001;
+    position: relative;
+}
+
+.mobile-menu-btn:hover {
+    color: var(--primary);
+}
+
+/* Desktop Navigation Styles */
+@media (min-width: 769px) {
+    nav {
+        position: relative;
+    }
+
+    nav ul {
+        display: flex !important;
+        position: static;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0;
+        box-shadow: none;
+        z-index: auto;
+        overflow: visible;
+    }
+
+    nav ul li {
+        margin: 0 15px;
+        padding: 0;
+        width: auto;
+        text-align: left;
+        border-bottom: none;
+    }
+
+    nav ul li a {
+        padding: 10px 0;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    nav ul li a:hover {
+        background-color: transparent;
+        color: var(--primary);
+    }
+
+    .mobile-menu-btn {
+        display: none !important;
+    }
 }
 
 /* Hero Section */
@@ -690,29 +753,73 @@ footer {
         font-size: 36px;
     }
 
+    nav {
+        position: static;
+    }
+
     nav ul {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 0;
         left: 0;
         width: 100%;
-        background-color: white;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.98);
         flex-direction: column;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 120px; /* Space for header */
+        box-shadow: none;
+        z-index: 999;
+        overflow-y: auto;
     }
 
     nav ul.active {
         display: flex;
+        animation: fadeIn 0.3s ease-out;
     }
 
     nav ul li {
         margin: 0;
-        padding: 15px;
+        padding: 0;
+        width: 100%;
+        text-align: center;
         border-bottom: 1px solid #eee;
+    }
+
+    nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    nav ul li a {
+        padding: 20px;
+        display: block;
+        transition: all 0.3s;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    nav ul li a:hover {
+        background-color: #f8f9fa;
+        color: var(--primary);
     }
 
     .mobile-menu-btn {
         display: block;
+    }
+
+    /* Ensure header container can accommodate mobile menu */
+    .header-container {
+        flex-wrap: wrap;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 
