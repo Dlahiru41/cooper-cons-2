@@ -1,1 +1,7 @@
- 
+# This is a reference to create a PNG favicon
+# You can use the existing 80.png image or create a new 32x32 favicon
+# For now, the SVG favicon will work for modern browsers
+# To create a proper PNG favicon, you can:
+# 1. Use the existing 80.png and resize it to 32x32
+# 2. Create a new favicon using online tools
+# 3. Convert the SVG to PNG using image editing software 

@@ -734,6 +734,21 @@ nav ul li a:hover::after {
     position: relative;
     overflow: hidden;
     margin-top: 40px;
+    cursor: grab;
+}
+
+.clients-scroll-container:active {
+    cursor: grabbing;
+}
+
+/* Hide scrollbar completely */
+.clients-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.clients-scroll-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .clients-scroll {
@@ -742,9 +757,15 @@ nav ul li a:hover::after {
     gap: 40px;
     align-items: center;
     width: max-content;
+    transition: animation-play-state 0.3s ease;
 }
 
 .clients-scroll:hover {
+    animation-play-state: paused;
+}
+
+/* Pause animation when user is scrolling */
+.clients-scroll-container:active .clients-scroll {
     animation-play-state: paused;
 }
 
@@ -793,6 +814,35 @@ nav ul li a:hover::after {
     }
 }
 
+/* Hover scroll indicators */
+.clients-scroll-container::before,
+.clients-scroll-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.clients-scroll-container::before {
+    left: 0;
+    background: linear-gradient(to right, #f8f9fa, transparent);
+}
+
+.clients-scroll-container::after {
+    right: 0;
+    background: linear-gradient(to left, #f8f9fa, transparent);
+}
+
+.clients-scroll-container:hover::before,
+.clients-scroll-container:hover::after {
+    opacity: 1;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .clients-scroll {
@@ -808,6 +858,12 @@ nav ul li a:hover::after {
     .client-logo {
         max-width: 120px;
         max-height: 60px;
+    }
+    
+    /* Hide hover indicators on mobile for cleaner look */
+    .clients-scroll-container::before,
+    .clients-scroll-container::after {
+        display: none;
     }
 }
 

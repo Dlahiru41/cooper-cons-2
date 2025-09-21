@@ -1,1 +1,4 @@
- 
+# This is a placeholder for favicon.ico
+# In a real implementation, you would need to create a proper ICO file
+# For now, the SVG favicon will work for modern browsers
+# You can convert the SVG to ICO using online tools or image editing software 

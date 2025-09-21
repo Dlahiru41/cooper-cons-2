@@ -779,6 +779,159 @@ function addAnimationStyles() {
     document.head.appendChild(styleSheet);
 }
 
+// Clients section hover scroll enhancement
+function initClientsScroll() {
+    const clientsScroll = document.querySelector('.clients-scroll');
+    const clientsContainer = document.querySelector('.clients-scroll-container');
+    
+    if (!clientsScroll || !clientsContainer) return;
+    
+    let isHovering = false;
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let animationId = null;
+    let currentScrollPosition = 0;
+    let targetScrollPosition = 0;
+    let scrollSpeed = 0;
+    
+    // Get the total scrollable width
+    const scrollWidth = clientsScroll.scrollWidth - clientsContainer.clientWidth;
+    
+    // Smooth scroll animation function
+    function smoothScroll() {
+        const diff = targetScrollPosition - currentScrollPosition;
+        const move = diff * 0.1; // Smoothing factor
+        currentScrollPosition += move;
+        
+        clientsScroll.style.transform = `translateX(-${currentScrollPosition}px)`;
+        
+        if (Math.abs(diff) > 0.1) {
+            animationId = requestAnimationFrame(smoothScroll);
+        } else {
+            currentScrollPosition = targetScrollPosition;
+            clientsScroll.style.transform = `translateX(-${currentScrollPosition}px)`;
+        }
+    }
+    
+    // Mouse move handler for hover scrolling
+    function handleMouseMove(e) {
+        if (!isHovering || isDragging) return;
+        
+        const rect = clientsContainer.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const containerWidth = rect.width;
+        
+        // Calculate scroll position based on mouse position
+        const scrollPercent = mouseX / containerWidth;
+        targetScrollPosition = scrollPercent * scrollWidth;
+        
+        // Cancel previous animation and start new one
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+        smoothScroll();
+    }
+    
+    // Mouse enter - pause animation and enable hover scrolling
+    clientsContainer.addEventListener('mouseenter', () => {
+        isHovering = true;
+        clientsScroll.style.animationPlayState = 'paused';
+        clientsContainer.addEventListener('mousemove', handleMouseMove);
+    });
+    
+    // Mouse leave - resume animation and stop hover scrolling
+    clientsContainer.addEventListener('mouseleave', () => {
+        isHovering = false;
+        clientsScroll.style.animationPlayState = 'running';
+        clientsContainer.removeEventListener('mousemove', handleMouseMove);
+        
+        // Reset scroll position to 0 when leaving
+        targetScrollPosition = 0;
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+        smoothScroll();
+    });
+    
+    // Mouse down - start dragging
+    clientsContainer.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - clientsContainer.offsetLeft;
+        scrollLeft = currentScrollPosition;
+        clientsContainer.style.cursor = 'grabbing';
+    });
+    
+    // Mouse move during drag
+    clientsContainer.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        
+        const x = e.pageX - clientsContainer.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed multiplier
+        targetScrollPosition = scrollLeft - walk;
+        
+        // Clamp scroll position
+        targetScrollPosition = Math.max(0, Math.min(scrollWidth, targetScrollPosition));
+        
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+        smoothScroll();
+    });
+    
+    // Mouse up - stop dragging
+    clientsContainer.addEventListener('mouseup', () => {
+        isDragging = false;
+        clientsContainer.style.cursor = 'grab';
+    });
+    
+    // Mouse leave during drag
+    clientsContainer.addEventListener('mouseleave', () => {
+        isDragging = false;
+        clientsContainer.style.cursor = 'grab';
+    });
+    
+    // Touch events for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    clientsContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        clientsScroll.style.animationPlayState = 'paused';
+    });
+    
+    clientsContainer.addEventListener('touchmove', (e) => {
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+        const deltaX = Math.abs(touchX - touchStartX);
+        const deltaY = Math.abs(touchY - touchStartY);
+        
+        // If horizontal scroll is more significant than vertical, prevent default
+        if (deltaX > deltaY) {
+            e.preventDefault();
+            
+            const walk = (touchStartX - touchX) * 2;
+            targetScrollPosition = Math.max(0, Math.min(scrollWidth, walk));
+            
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+            smoothScroll();
+        }
+    });
+    
+    clientsContainer.addEventListener('touchend', () => {
+        // Resume animation after touch ends
+        setTimeout(() => {
+            if (!isHovering) {
+                clientsScroll.style.animationPlayState = 'running';
+            }
+        }, 1000);
+    });
+}
+
 // Initialize all animations
 document.addEventListener('DOMContentLoaded', function() {
     // Add animation styles
@@ -793,6 +946,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     initFormAnimations();
     initLogoAnimation();
+    initClientsScroll();
 
     // Initial animations for hero section
     setTimeout(() => {
